@@ -36,21 +36,19 @@ public class NetUtils {
 
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(outputStream);
 
-            //objectOutputStream.writeObject(access.getRegistryKey());
             objectOutputStream.writeObject(access.getRegistryKey().getValue().toString());
             objectOutputStream.flush();
-           // objectOutputStream.writeObject(new ChunkPos(x,z));
+
             objectOutputStream.writeObject(x);
             objectOutputStream.flush();
+
             objectOutputStream.writeObject(z);
             objectOutputStream.flush();
 
-            //WorldChunk chunk = (WorldChunk) objectInputStream.readObject();
-            //ChunkMirror.LOGGER.info((String) objectInputStream.readObject());
             ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
 
-            String serChunk = (String) objectInputStream.readObject(); //!!! stops here
-            ChunkMirror.LOGGER.info(serChunk);
+            String serChunk = (String) objectInputStream.readObject(); //!!! hangs here if client is the same server
+
             NbtCompound nbtChunk = NbtHelper.fromNbtProviderString(serChunk);
             ProtoChunk chunk = ChunkSerializer.deserialize((ServerWorld) access,((ServerWorld) access).getPointOfInterestStorage(),new ChunkPos(x,z),nbtChunk);
 

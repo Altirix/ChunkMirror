@@ -17,10 +17,11 @@ import java.util.function.Supplier;
 public class WorldMixin {
 
     @Inject(at = @At("TAIL"), method = "<init>")
-    private void init(MutableWorldProperties properties, RegistryKey registryRef, RegistryEntry registryEntry, Supplier profiler, boolean isClient, boolean debugWorld, long seed, CallbackInfo ci) {
-        ChunkMirrorServer.worlds.put(registryRef.getValue().toString(), (World) (Object) this);
+    private void init(MutableWorldProperties properties, RegistryKey registryRef, RegistryEntry registryEntry,
+                      Supplier profiler, boolean isClient, boolean debugWorld, long seed, CallbackInfo ci) {
 
-        ChunkMirror.LOGGER.info("Init Mirror World: " + registryRef.getValue());
+        ChunkMirrorServer.worlds.put(registryRef.getValue().toString(), (World) (Object) this);
+        ChunkMirror.LOGGER.info("Added World Reference to: " + registryRef.getValue());
 
     }
 }

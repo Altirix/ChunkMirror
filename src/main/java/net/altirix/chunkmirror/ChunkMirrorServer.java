@@ -27,8 +27,8 @@ public class ChunkMirrorServer {
 
         Runnable serverTask = () -> {
             try {
-                ServerSocket serverSocket = new ServerSocket(8000);
-                ChunkMirror.LOGGER.info("Waiting for clients to connect...");
+                ServerSocket serverSocket = new ServerSocket(9000);
+                ChunkMirror.LOGGER.info("Ready For Clients");
                 while (true) {
                     Socket clientSocket = serverSocket.accept();
                     clientProcessingPool.submit(new ClientTask(clientSocket));
@@ -46,7 +46,7 @@ public class ChunkMirrorServer {
     private record ClientTask(Socket clientSocket) implements Runnable {
         @Override
         public void run() {
-            ChunkMirror.LOGGER.info("Got a client !");
+            ChunkMirror.LOGGER.info("Client Connected");
             try {
                 InputStream inputStream = clientSocket.getInputStream();
                 OutputStream outputStream = clientSocket.getOutputStream();
