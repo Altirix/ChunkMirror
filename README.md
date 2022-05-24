@@ -1,9 +1,9 @@
-# Fabric Example Mod
+# ChunkMirror
 
-## Setup
+in development.
 
-For setup instructions please see the [fabric wiki page](https://fabricmc.net/wiki/tutorial:setup) that relates to the IDE that you are using.
+Lets servers copy chunks from other servers
 
-## License
+Attempting to copy chunks from the same server cause the server to hang. idk why
 
-This template is available under the CC0 license. Feel free to learn from it and incorporate it in your own projects.
+Light updates do not occur for pasted chunks.
