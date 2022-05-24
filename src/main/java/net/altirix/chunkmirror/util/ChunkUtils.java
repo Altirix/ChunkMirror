@@ -18,13 +18,13 @@ import java.util.concurrent.Executors;
 
 public class ChunkUtils {
 
-    public static void replaceChunk(World access, int x1, int z1, int x2, int z2) throws ExecutionException, InterruptedException {
-        WorldChunk chunkTarget = access.getChunk(x1, z1);
+    public static void replaceChunk(World access, int xc, int zc) throws ExecutionException, InterruptedException {
+        WorldChunk chunkTarget = access.getChunk(xc, zc);
 
         CompletableFuture<ProtoChunk> completableFuture = new CompletableFuture<>();
 
         new Thread(() -> {
-            ProtoChunk chunkReplace = NetUtils.receiveChunk(access, x2, z2);
+            ProtoChunk chunkReplace = NetUtils.receiveChunk(access, xc, zc);
             completableFuture.complete(chunkReplace);
         }).start();
 

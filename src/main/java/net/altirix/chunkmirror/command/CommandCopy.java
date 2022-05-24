@@ -21,32 +21,22 @@ import java.util.concurrent.ExecutionException;
 public class CommandCopy {
     public static void register(CommandDispatcher<ServerCommandSource> dispatcher) {
         LiteralArgumentBuilder<ServerCommandSource> literal = CommandManager.literal("copy");
-        literal.executes(CommandCopy::execute)
-                .then(CommandManager.argument("radius", IntegerArgumentType.integer(1,5))
-                        .executes(CommandCopy::execute));
-
+        literal.executes(CommandCopy::execute);
         dispatcher.register(literal);
     }
 
     public static int execute(CommandContext<ServerCommandSource> context) throws CommandSyntaxException {
-        Integer radius = 1;
-        try {
-            radius = IntegerArgumentType.getInteger(context, "radius");
-        } catch (IllegalArgumentException ignored) {
-        }
-
         ServerPlayerEntity player = context.getSource().getPlayer();
         UUID playerUuid = player.getUuid();
 
         ChunkPos cPos = player.getChunkPos();
 
         try {
-            ChunkUtils.replaceChunk(player.world, cPos.x, cPos.z,cPos.x-1,cPos.z);
+            ChunkUtils.replaceChunk(player.world, cPos.x, cPos.z);
         } catch (ExecutionException | InterruptedException e) {
             throw new RuntimeException(e);
         }
 
-        ChunkMirror.LOGGER.debug(String.valueOf(radius));
         player.sendSystemMessage(Text.of("test"), playerUuid);
         return Command.SINGLE_SUCCESS;
     }

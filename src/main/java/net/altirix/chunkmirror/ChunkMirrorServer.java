@@ -52,7 +52,6 @@ public class ChunkMirrorServer {
                 OutputStream outputStream = clientSocket.getOutputStream();
 
                 ObjectInputStream objectInputStream = new ObjectInputStream(inputStream);
-                //RegistryKey<World> dim = (RegistryKey<World>) objectInputStream.readObject(); // send world and dimChunkPos
 
                 String world = (String) objectInputStream.readObject();
                 int x = (int) objectInputStream.readObject();
